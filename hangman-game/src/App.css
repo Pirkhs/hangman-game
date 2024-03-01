@@ -1,0 +1,30 @@
+* {
+  background-color: white;;
+}
+
+header {
+  text-align: center;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin-top: 3%;
+  
+}
+
+.word-display {
+  text-align: center;
+  font-size: 300%;
+}
+
+.graphic {
+  text-align: center;
+  border: 3px dotted black;
+}
+
+.letter-guess {
+  text-align: center;
+}
+
+.letter-guess button {
+  margin: 2px;
+  padding: 5px;
+  font-size: 200%;
+}
