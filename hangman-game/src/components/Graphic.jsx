@@ -4,7 +4,7 @@ const Graphic = () => {
     const [gameState, setGameState] = useState(1)
     return (
     <div className="graphic">
-        <img src={`../game-state-imgs/game-state-${gameState}.png`}/>
+        <img src={`game-state-imgs/game-state-${gameState}.png`}/>
     </div>
     )
 }
