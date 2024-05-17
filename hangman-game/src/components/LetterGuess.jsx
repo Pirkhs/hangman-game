@@ -40,10 +40,12 @@ const LetterGuess = () => {
     return (
         <>
         <div className="letter-guess">
-                <p> {message} </p>
 
-                { isGameOver ? <button className="btn-reset" onClick={() => {resetGame()}}> Play Again </button> : ""}
+            <p> {message} </p>
 
+            { isGameOver ? 
+                <button className="btn-reset" onClick={() => {resetGame()}}> Play Again </button>
+                : 
                 <div className="letter-options">
                 {alphabet.map(letter => {
                     return (
@@ -51,7 +53,8 @@ const LetterGuess = () => {
                     )
                 })}
                 </div>
-            </div>
+            }
+        </div>
             <Graphic gameState={gameState}/>
             <WordDisplay wordToGuess={wordToGuess}/>
         </>
