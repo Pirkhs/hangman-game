@@ -8,7 +8,7 @@ const LetterGuess = () => {
     const [isGameOver, setIsGameOver] = useState(false)
     const [message, setMessage] = useState("Begin by picking a letter to guess:")
     let [gameState, setGameState] = useState(1)
-    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
+    const [alphabet, setAlphabet] = useState(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ])
     console.log(wordToGuess);
     
     const resetGame = () => {
@@ -16,10 +16,12 @@ const LetterGuess = () => {
         setIsGameOver(false)
         setGameState(1)
         setMessage('Begin by picking a letter to guess:')
+        setAlphabet(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ])
     }
 
     const handleLetterGuess = (e) => {
         const guessedLetter = e.target.value;
+        setAlphabet(currAlphabet => currAlphabet.filter(letter => letter !== guessedLetter ))
         if (wordToGuess.includes(guessedLetter)) handleCorrectlyGuessedLetter();
         else handleIncorrectlyGuessedLetter();
     }
