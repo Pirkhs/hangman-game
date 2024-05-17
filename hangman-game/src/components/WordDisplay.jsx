@@ -1,9 +1,6 @@
 import { useState } from 'react'
-import { generate, count } from "random-words";
 
-const WordDisplay = () => {
-    const wordToGuess = generate({minLength: 5, maxLength: 5})
-
+const WordDisplay = ({wordToGuess}) => {
     const [trackCurrentWord, setTrackCurrentWord] = useState("_ ".repeat(wordToGuess.length)) 
     return (
         <div className="word-display">

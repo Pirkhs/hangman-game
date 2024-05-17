@@ -1,10 +1,8 @@
-import { useState } from 'react'
 
-const Graphic = () => {
-    const [gameState, setGameState] = useState(1)
+const Graphic = ({gameState}) => {
     return (
-    <div className="graphic">
-        <img src={`game-state-imgs/game-state-${gameState}.png`}/>
+    <div className="graphic-section">
+        <img className="graphic" src={`/src/game-state-imgs/game-state-${gameState}.png`}/>
     </div>
     )
 }
