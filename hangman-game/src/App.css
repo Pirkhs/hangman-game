@@ -24,7 +24,7 @@ header {
   
 }
 
-.letter-guess {
+.section-letter-guess {
   text-align: center;
 }
 
@@ -32,11 +32,18 @@ header {
   border-radius: 10%;
 }
 
+/* .letter-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+} */
+
 .button-letter{
   box-shadow: 2px 2px black;
   margin: 2px;
   padding: 5px;
   font-size: 200%;
+  width: 1.1em;
 }
 
 .graphic-section {
