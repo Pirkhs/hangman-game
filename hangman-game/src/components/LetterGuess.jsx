@@ -5,6 +5,10 @@ import WordDisplay from './WordDisplay'
 
 const LetterGuess = () => {
     
+    const resetLocalStorage = () => localStorage.clear();
+    // resetLocalStorage()
+
+    const leastIncorrect = localStorage.getItem("leastIncorrect") ?? undefined
     const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
     const wordLength = 5;
 
@@ -14,12 +18,11 @@ const LetterGuess = () => {
     let [gameState, setGameState] = useState(1)
     let [wordDisplay, setWordDisplay] = useState("_".repeat(wordLength))
 
-    console.log(wordToGuess);
-
     if (wordDisplay === wordToGuess) {
         setWordToGuess("")
         setMessage(`👑 You Won! With ${gameState - 1} incorrect ${gameState  === 2 ? `guess!` : `guesses!`}`)
         setIsGameOver(true)
+        if (gameState - 1 < leastIncorrect || leastIncorrect === undefined) localStorage.setItem("leastIncorrect", gameState - 1 )
     }
 
     const resetGame = () => {
@@ -75,6 +78,7 @@ const LetterGuess = () => {
         </div>
             <Graphic gameState={gameState}/>
             <WordDisplay wordDisplay={wordDisplay}/>
+            {leastIncorrect >= 0 ? <p className="least-incorrect"> Least incorrect guesses: {leastIncorrect} </p> : ""}
         </>
     )
 }
