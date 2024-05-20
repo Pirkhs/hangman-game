@@ -28,6 +28,10 @@ header {
   text-align: center;
 }
 
+.message {
+  font-size: 175%;
+}
+
 .btn-reset {
   border-radius: 10%;
 }
@@ -47,8 +51,8 @@ header {
 }
 
 .graphic-section {
-  margin-top: inherit;
-  margin-bottom: inherit;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .graphic {
@@ -61,7 +65,7 @@ header {
 
 .word-display {
   text-align: center;
-  font-size: 300%;
+  font-size: 150%;
 }
 
 .tick {

@@ -4,14 +4,21 @@ import { generate} from "random-words"
 import WordDisplay from './WordDisplay'
 
 const LetterGuess = () => {
-    let [correctLetter, setCorrectLetter] = useState(undefined)
+    
     const [wordToGuess, setWordToGuess] = useState(generate({minLength: 5, maxLength: 5}).toUpperCase())
     const [isGameOver, setIsGameOver] = useState(false)
     const [message, setMessage] = useState("Begin by picking a letter to guess:")
     let [gameState, setGameState] = useState(1)
     const [alphabet, setAlphabet] = useState(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ])
+    let [wordDisplay, setWordDisplay] = useState("_".repeat(wordToGuess.length))
 
     console.log(wordToGuess);
+
+    if (wordDisplay === wordToGuess) {
+        setWordToGuess("")
+        setMessage(`👑 You Won! With ${gameState - 1} incorrect ${gameState  === 2 ? `guess!` : `guesses!`}`)
+        setIsGameOver(true)
+    }
 
     const resetGame = () => {
         setWordToGuess(generate({minLength: 5, maxLength: 5}).toUpperCase())
@@ -19,6 +26,7 @@ const LetterGuess = () => {
         setGameState(1)
         setMessage('Begin by picking a letter to guess:')
         setAlphabet(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ])
+        setWordDisplay("_".repeat(5))
     }
 
     const handleLetterGuess = (e) => {
@@ -29,29 +37,28 @@ const LetterGuess = () => {
     }
     
     const handleCorrectlyGuessedLetter = (guessedLetter) => {
-        setMessage('✅ Correct, Pick another letter:')
-        setCorrectLetter(guessedLetter)
+        setMessage('✅ Correct, Pick another letter:');
+        [...wordToGuess].forEach((letter, index) => {
+            if (letter === guessedLetter) {
+            setWordDisplay(wordDisplay => wordDisplay.slice(0, index) + guessedLetter + wordDisplay.slice(index + 1))
+            }
+        })
     }
     
     const handleIncorrectlyGuessedLetter = () => {
-        setMessage(`❌ Incorrect, ${9-gameState} guesses left`)
+        setMessage(`❌ Incorrect, ${9-gameState} ${9-gameState === 1 ? "guess" : "guesses"} left!`)
         setGameState(++gameState)
         if (gameState === 10) {
-            setMessage('🚫 Game Over, You Lose :(')
+            setMessage(`🚫 Game Over, The word was ${(wordToGuess).toLowerCase()} `)
             setIsGameOver(true)
         }
-    }
-
-    const handleCorrectLetterState = (state) => {
-        console.log(state);
-        setCorrectLetter(state)
     }
 
     return (
         <>
         <div className="section-letter-guess">
 
-            <p> {message} </p>
+            <p className="message"> {message} </p>
 
             { isGameOver ? 
                 <button className="btn-reset" onClick={() => {resetGame()}}> Play Again </button>
@@ -66,7 +73,7 @@ const LetterGuess = () => {
             }
         </div>
             <Graphic gameState={gameState}/>
-            <WordDisplay wordToGuess={wordToGuess} correctLetter={correctLetter} handleCorrectLetterState={handleCorrectLetterState}/>
+            <WordDisplay wordDisplay={wordDisplay}/>
         </>
     )
 }
