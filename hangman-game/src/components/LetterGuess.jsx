@@ -5,12 +5,14 @@ import WordDisplay from './WordDisplay'
 
 const LetterGuess = () => {
     
-    const [wordToGuess, setWordToGuess] = useState(generate({minLength: 5, maxLength: 5}).toUpperCase())
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
+    const wordLength = 5;
+
+    const [wordToGuess, setWordToGuess] = useState(generate({minLength: wordLength, maxLength: wordLength}).toUpperCase())
     const [isGameOver, setIsGameOver] = useState(false)
     const [message, setMessage] = useState("Begin by picking a letter to guess:")
     let [gameState, setGameState] = useState(1)
-    const [alphabet, setAlphabet] = useState(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ])
-    let [wordDisplay, setWordDisplay] = useState("_".repeat(wordToGuess.length))
+    let [wordDisplay, setWordDisplay] = useState("_".repeat(wordLength))
 
     console.log(wordToGuess);
 
@@ -21,17 +23,16 @@ const LetterGuess = () => {
     }
 
     const resetGame = () => {
-        setWordToGuess(generate({minLength: 5, maxLength: 5}).toUpperCase())
+        setWordToGuess(generate({minLength: wordLength, maxLength: wordLength}).toUpperCase())
         setIsGameOver(false)
         setGameState(1)
         setMessage('Begin by picking a letter to guess:')
-        setAlphabet(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ])
-        setWordDisplay("_".repeat(5))
+        setWordDisplay("_".repeat(wordLength))
     }
 
     const handleLetterGuess = (e) => {
         const guessedLetter = e.target.value;
-        setAlphabet(currAlphabet => currAlphabet.filter(letter => letter !== guessedLetter ))
+        e.target.disabled = true;
         if (wordToGuess.includes(guessedLetter)) handleCorrectlyGuessedLetter(guessedLetter);
         else handleIncorrectlyGuessedLetter();
     }
