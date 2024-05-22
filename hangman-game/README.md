@@ -3,7 +3,7 @@
 ## Project Summary
 
 A web application for the iconic hangman game with the following features:
-- A random 5-letter word in generated at random
+- A random 5-letter word is generated at random
 - Begin the game by picking your first letter to guess
 - Incorrectly guessed letters display a unique message for the number of lives remaining, along with the updated hangman drawing
 - Correctly guessed letters display a confirmation message, along with the guessed letter appearing the word display
